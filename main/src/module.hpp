@@ -4,7 +4,7 @@
 
 #include <vxgui/editor/main/editor.hpp>
 
-#include "../ui/instances/text_editor/text_editor.hpp"
+#include "../ui/instances/hello_window/hello_window.hpp"
 
 #ifndef TEXT_EDIT_HPP
 #define TEXT_EDIT_HPP
@@ -16,8 +16,7 @@
 namespace TextEdit {
 struct Context {
   std::shared_ptr<ModuleInterface> m_interface;
-  std::vector<std::shared_ptr<ModuleUI::TextEditorAppWindow>>
-      m_text_editor_instances;
+  std::vector<std::shared_ptr<ModuleUI::HelloWindow>> m_text_editor_instances;
 };
 } // namespace TextEdit
 

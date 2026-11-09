@@ -20,6 +20,10 @@ public:
 
     this->add_content_browser_item_identifier(ItemIdentifierInterface(
         TextEdit::IsValidFile, "text_edit:superfile", "Super file", "#553333"));
+    this->add_toolbar_handler(ToolbarHandlerInterface(
+        []() { TextEdit::StartTextEditorInstance(""); }, "Hello window",
+        "Open a hello window", "Hello",
+        TextEdit::get_path("resources/icons/edit.png")));
 
     this->set_credits_file(TextEdit::get_path("CREDITS"));
 
@@ -39,7 +43,7 @@ public:
 
     // Clear windows
     for (auto i : TextEdit::get_current_context()->m_text_editor_instances) {
-      CherryApp.DeleteAppWindow(i->GetAppWindow());
+      CherryApp.DeleteAppWindow(i->get_app_window());
     }
 
     TextEdit::destroy_context(ctx);

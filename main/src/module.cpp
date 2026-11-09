@@ -55,17 +55,11 @@ void TextEdit::StartTextEditorInstance(const std::string &path) {
   }
 
   std::string window_name =
-      filename + "####" +
       std::to_string(get_current_context()->m_text_editor_instances.size());
 
-  auto inst = ModuleUI::TextEditorAppWindow::Create(path, window_name);
-  Cherry::AddAppWindow(inst->GetAppWindow());
+  auto inst = ModuleUI::HelloWindow::create(window_name);
+  Cherry::AddAppWindow(inst->get_app_window());
   TextEdit::get_current_context()->m_text_editor_instances.push_back(inst);
 }
 
-void TextEdit::oe_save_all() {
-  for (auto &editor :
-       TextEdit::get_current_context()->m_text_editor_instances) {
-    editor->m_SavePending = true;
-  }
-}
+void TextEdit::oe_save_all() {}
