@@ -1,0 +1,20 @@
+{
+    "type": "em",
+    "group": "Basic tools",
+    "name": "infinitehq.textedit",
+    "proper_name": "TextEdit",
+    "auto_exec": true,
+    "version": "1.0.1",
+    "author": "Infinite",
+    "contributors": [
+        "Diego E. Moreno <d@infinite.si>"
+    ],
+    "deps": [
+    ],
+    "compatibility": [
+        "1.0"
+    ],
+    "path": "./libmodule.so",
+    "picture": "./resources/logo.png",
+    "description": "A very simple and tiny text editor. Open, edit and save config files, text files easely."
+}
