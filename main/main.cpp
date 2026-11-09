@@ -22,9 +22,13 @@ public:
         TextEdit::IsValidFile, "text_edit:superfile", "Super file", "#553333"));
     this->add_toolbar_handler(ToolbarHandlerInterface(
         []() { TextEdit::StartTextEditorInstance(""); }, "Hello window",
-        "Open a hello window", "Hello",
+        "Open a hello window", "Hello/Test",
         TextEdit::get_path("resources/icons/edit.png")));
+    this->add_toolbar_topic_logo(
+        "Hello/Test", TextEdit::get_path("resources/icons/edit.png"));
 
+    this->set_toolbar_main_logo_path(
+        TextEdit::get_path("resources/icons/edit.png"));
     this->set_credits_file(TextEdit::get_path("CREDITS"));
 
     this->add_output_event(
