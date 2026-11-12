@@ -2,43 +2,48 @@
 
 class infinitehq_textedit : public ModuleInterface {
 public:
-  std::shared_ptr<TextEdit::Context> ctx;
+  std::shared_ptr<HelloWorldModule::Context> ctx;
   void execute() override {
-    ctx = TextEdit::create_context();
+    ctx = HelloWorldModule::create_context();
 
     auto m = ModuleInterface::get_editor_module_by_name(this->name());
-    TextEdit::get_current_context()->m_interface = m;
+    HelloWorldModule::get_current_context()->m_interface = m;
 
     // Add item handler for simple txt files
     this->add_content_browser_item_handler(ItemHandlerInterface(
-        "file_txt", TextEdit::StartTextEditorInstance, "Edit",
-        "Edit this txt file", TextEdit::get_path("resources/icons/edit.png")));
+        "file_txt", HelloWorldModule::StartTextEditorInstance, "Edit",
+        "Edit this txt file",
+        HelloWorldModule::get_path("resources/icons/edit.png")));
 
     this->add_content_browser_item_handler(ItemHandlerInterface(
-        "text_edit:superfile", TextEdit::StartTextEditorInstance, "Super Edit",
-        "Edit this txt file", TextEdit::get_path("resources/icons/edit.png")));
+        "infinitehq.helloworldmodule:superfile",
+        HelloWorldModule::StartTextEditorInstance, "Super Edit",
+        "Edit this txt file",
+        HelloWorldModule::get_path("resources/icons/edit.png")));
 
     this->add_content_browser_item_identifier(ItemIdentifierInterface(
-        TextEdit::IsValidFile, "text_edit:superfile", "Super file", "#553333"));
+        HelloWorldModule::IsValidFile, "infinitehq.helloworldmodule:superfile",
+        "Super file", "#553333"));
     this->add_toolbar_handler(ToolbarHandlerInterface(
-        []() { TextEdit::StartTextEditorInstance(""); }, "Hello window",
+        []() { HelloWorldModule::StartTextEditorInstance(""); }, "Hello window",
         "Open a hello window", "Hello/Test",
-        TextEdit::get_path("resources/icons/edit.png")));
+        HelloWorldModule::get_path("resources/icons/edit.png")));
     this->add_toolbar_topic_logo(
-        "Hello/Test", TextEdit::get_path("resources/icons/edit.png"));
+        "Hello/Test", HelloWorldModule::get_path("resources/icons/edit.png"));
 
     this->set_toolbar_main_logo_path(
-        TextEdit::get_path("resources/icons/edit.png"));
-    this->set_credits_file(TextEdit::get_path("CREDITS"));
+        HelloWorldModule::get_path("resources/icons/edit.png"));
+    this->set_credits_file(HelloWorldModule::get_path("CREDITS"));
 
     this->add_output_event(
-        ModuleOutputEvent(TextEdit::oe_save_all, "save_all"));
+        ModuleOutputEvent(HelloWorldModule::oe_save_all, "save_all"));
   }
 
   void init_ui() override {
     // CherryApp.AddFont(
     //     "JetBrainsMono",
-    //     TextEdit::GetPath("resources/fonts/JetBrainsMono-Regular.ttf"), 40.0f);
+    //     HelloWorldModule::GetPath("resources/fonts/JetBrainsMono-Regular.ttf"),
+    //     40.0f);
   }
 
   void destroy() override {
@@ -46,11 +51,12 @@ public:
     this->reset_module();
 
     // Clear windows
-    for (auto i : TextEdit::get_current_context()->m_text_editor_instances) {
+    for (auto i :
+         HelloWorldModule::get_current_context()->m_text_editor_instances) {
       CherryApp.DeleteAppWindow(i->get_app_window());
     }
 
-    TextEdit::destroy_context(ctx);
+    HelloWorldModule::destroy_context(ctx);
     ctx.reset();
   }
 };

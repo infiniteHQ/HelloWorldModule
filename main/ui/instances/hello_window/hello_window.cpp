@@ -9,7 +9,7 @@ namespace ModuleUI {
 HelloWindow::HelloWindow(const std::string &name) {
   app_window_ = std::make_shared<Cherry::AppWindow>(name, name);
 
-  app_window_->SetIcon(TextEdit::get_path("resources/icons/edit.png"));
+  app_window_->SetIcon(HelloWorldModule::get_path("resources/icons/edit.png"));
 
   app_window_->m_CloseCallback = [=]() {
     Cherry::DeleteAppWindow(app_window_);

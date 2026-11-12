@@ -1,8 +1,8 @@
 {
     "type": "em",
     "group": "Basic tools",
-    "name": "infinitehq.textedit",
-    "proper_name": "TextEdit",
+    "name": "infinitehq.helloworldmodule",
+    "proper_name": "HelloWorldModule",
     "auto_exec": true,
     "version": "1.0.1",
     "author": "Infinite",

@@ -2,34 +2,37 @@
 
 // runtime pointer
 #ifndef CTextEdit
-std::weak_ptr<TextEdit::Context> CTextEdit;
+std::weak_ptr<HelloWorldModule::Context> CTextEdit;
 #endif
 
-std::shared_ptr<TextEdit::Context> TextEdit::create_context() {
-  auto ctx = std::make_shared<TextEdit::Context>();
+std::shared_ptr<HelloWorldModule::Context> HelloWorldModule::create_context() {
+  auto ctx = std::make_shared<HelloWorldModule::Context>();
 
   set_current_context(ctx);
 
   return ctx;
 }
 
-void TextEdit::destroy_context(std::shared_ptr<TextEdit::Context> ctx) {
+void HelloWorldModule::destroy_context(
+    std::shared_ptr<HelloWorldModule::Context> ctx) {
   set_current_context(nullptr);
 }
 
-void TextEdit::set_current_context(std::shared_ptr<TextEdit::Context> ctx) {
+void HelloWorldModule::set_current_context(
+    std::shared_ptr<HelloWorldModule::Context> ctx) {
   CTextEdit = ctx;
 }
 
-std::shared_ptr<TextEdit::Context> TextEdit::get_current_context() {
+std::shared_ptr<HelloWorldModule::Context>
+HelloWorldModule::get_current_context() {
   return CTextEdit.lock();
 }
 
-std::string TextEdit::get_path(const std::string &path) {
+std::string HelloWorldModule::get_path(const std::string &path) {
   return get_current_context()->m_interface->cook_path(path);
 }
 
-bool TextEdit::IsValidFile(const std::string &path) {
+bool HelloWorldModule::IsValidFile(const std::string &path) {
   namespace fs = std::filesystem;
 
   if (!fs::is_directory(path)) {
@@ -46,7 +49,7 @@ bool TextEdit::IsValidFile(const std::string &path) {
   return false;
 }
 
-void TextEdit::StartTextEditorInstance(const std::string &path) {
+void HelloWorldModule::StartTextEditorInstance(const std::string &path) {
   std::string filename = fs::path(path).filename().string();
 
   const size_t maxLen = 24;
@@ -59,7 +62,8 @@ void TextEdit::StartTextEditorInstance(const std::string &path) {
 
   auto inst = ModuleUI::HelloWindow::create(window_name);
   Cherry::AddAppWindow(inst->get_app_window());
-  TextEdit::get_current_context()->m_text_editor_instances.push_back(inst);
+  HelloWorldModule::get_current_context()->m_text_editor_instances.push_back(
+      inst);
 }
 
-void TextEdit::oe_save_all() {}
+void HelloWorldModule::oe_save_all() {}
